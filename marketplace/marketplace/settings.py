@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     "frontend",
     "rest_framework",
+    "django_filters",
 
     "products.apps.ProductsConfig",
     "catalog.apps.CatalogConfig",
@@ -130,7 +131,10 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-REST_FRAMEWORKS = {
+REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 10,
+    "DEFAULT_FILTER_BACKENDS": [
+        "django_filters.rest_framework.DjangoFilterBackend",
+    ]
 }

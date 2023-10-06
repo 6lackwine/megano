@@ -5,6 +5,24 @@
     <value-preview-text-wrapping value="false" />
     <value-preview-pinned value="false" />
   </component>
+  <component name="DBNavigator.Project.DataExportManager">
+    <export-instructions>
+      <create-header value="true" />
+      <friendly-headers value="false" />
+      <quote-values-containing-separator value="true" />
+      <quote-all-values value="false" />
+      <value-separator value="" />
+      <begin-quote value="&quot;" />
+      <end-quote value="&quot;" />
+      <file-name value="" />
+      <file-location value="" />
+      <scope value="GLOBAL" />
+      <destination value="FILE" />
+      <format value="EXCEL" />
+      <charset value="windows-1251" />
+      <charset value="windows-1251" />
+    </export-instructions>
+  </component>
   <component name="DBNavigator.Project.DatabaseBrowserManager">
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
@@ -12,7 +30,7 @@
     <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
-    <connection id="075b9258-df8d-4e65-ac69-fd65e6de944c">
+    <connection id="978a9e2f-c8d7-48b5-9792-acd67a661037">
       <console name="Connection" type="STANDARD" schema="" session="Main" />
     </connection>
   </component>
@@ -23,8 +41,22 @@
     <open-files />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
-    <filter-actions connection-id="075b9258-df8d-4e65-ac69-fd65e6de944c" dataset="main.products_product" active-filter-id="EMPTY_FILTER" />
-    <filter-actions connection-id="075b9258-df8d-4e65-ac69-fd65e6de944c" dataset="main.auth_group_permissions" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="978a9e2f-c8d7-48b5-9792-acd67a661037" dataset="main.profiles_profiles" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="978a9e2f-c8d7-48b5-9792-acd67a661037" dataset="main.products_product" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="978a9e2f-c8d7-48b5-9792-acd67a661037" dataset="main.catalog_categories" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="978a9e2f-c8d7-48b5-9792-acd67a661037" dataset="main.products_tag_products" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="978a9e2f-c8d7-48b5-9792-acd67a661037" dataset="main.orders_order_products" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="978a9e2f-c8d7-48b5-9792-acd67a661037" dataset="main.products_tag" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="978a9e2f-c8d7-48b5-9792-acd67a661037" dataset="main.profiles_profileavatar" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="978a9e2f-c8d7-48b5-9792-acd67a661037" dataset="main.auth_user" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="978a9e2f-c8d7-48b5-9792-acd67a661037" dataset="main.orders_order" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="978a9e2f-c8d7-48b5-9792-acd67a661037" dataset="main.profiles_profile" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="978a9e2f-c8d7-48b5-9792-acd67a661037" dataset="main.products_product_tags" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="978a9e2f-c8d7-48b5-9792-acd67a661037" dataset="main.products_review" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="978a9e2f-c8d7-48b5-9792-acd67a661037" dataset="main.products_productimage" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="978a9e2f-c8d7-48b5-9792-acd67a661037" dataset="main.products_productspecification" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="978a9e2f-c8d7-48b5-9792-acd67a661037" dataset="main.catalog_categories_subcategories" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="978a9e2f-c8d7-48b5-9792-acd67a661037" dataset="main.catalog_categoryimage" active-filter-id="EMPTY_FILTER" />
   </component>
   <component name="DBNavigator.Project.ExecutionManager">
     <retain-sticky-names value="false" />
@@ -41,9 +73,12 @@
     <last-used-operator value="EQUAL" />
     <filters />
   </component>
+  <component name="DBNavigator.Project.ScriptExecutionManager" clear-outputs="true">
+    <recently-used-interfaces />
+  </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection id="075b9258-df8d-4e65-ac69-fd65e6de944c" active="true" signed="true">
+      <connection id="978a9e2f-c8d7-48b5-9792-acd67a661037" active="true" signed="true">
         <database>
           <name value="Connection" />
           <description value="" />
@@ -526,5 +561,8 @@
         </visibility-settings>
       </environment>
     </general-settings>
+  </component>
+  <component name="DBNavigator.Project.StatementExecutionManager">
+    <execution-variables />
   </component>
 </project>
