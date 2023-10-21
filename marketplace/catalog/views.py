@@ -11,9 +11,9 @@ from rest_framework.viewsets import ModelViewSet
 
 from catalog.filters import ProductFilter
 from catalog.models import Categories
-from catalog.serializers import CategoriesSerializers, CustomPagination
+from catalog.serializers import CategoriesSerializers, CustomPagination, BasketSerializers
 from products.models import Product
-from products.serializers import ProductSerializers
+from products.serializers import ProductSerializers, ProductsPopularAndLimitedSerializers
 
 
 class CategoryAPIView(APIView):
@@ -25,8 +25,9 @@ class CategoryAPIView(APIView):
 class CatalogAPIView(ListAPIView):
     serializer_class = ProductSerializers
     pagination_class = CustomPagination
-    #filterset_class = ProductFilter
+    filterset_class = ProductFilter
     filter_backends = (DjangoFilterBackend,)
+
     def get_queryset(self):
         queryset = Product.objects.all()
         if self.request.query_params:
@@ -36,7 +37,12 @@ class CatalogAPIView(ListAPIView):
             freeDelivery = self.request.query_params.get("filter[freeDelivery]")
             available = self.request.query_params.get("filter[available]")
             tags = self.request.query_params.getlist('tags[]')
-            print(self.request.query_params, "AAAAAAA")
+            category = self.request.META['HTTP_REFERER'].split('/')[4]
+            print(self.request.query_params)
+            if category:
+                categories = [obj.pk for obj in Categories.objects.filter(parent_id=category)]
+                categories.append(int(category))
+                queryset = queryset.filter(category__in=categories)
             if name:
                 queryset = queryset.filter(title__icontains=name)
             if minPrice:
@@ -47,6 +53,35 @@ class CatalogAPIView(ListAPIView):
                 queryset = queryset.filter(freeDelivery=True)
             if available == "true":
                 queryset = queryset.filter(available=True)
-            if len(tags) != 0:
+            if tags:
                 queryset = queryset.filter(tags__in=tags)
+
+            sort = self.request.query_params.get("sort")
+            sortType = self.request.query_params.get("sortType")
+            if sort == "price":
+                if sortType == "inc":
+                    queryset = queryset.order_by("-price")
+                else:
+                    queryset = queryset.order_by("price")
+            elif sort == "rating":
+                if sortType == "inc":
+                    queryset = queryset.order_by("-rating")
+                else:
+                    queryset = queryset.order_by("rating")
+            elif sort == "reviews":
+                if sortType == "inc":
+                    queryset = queryset.order_by("-reviews")
+                else:
+                    queryset = queryset.order_by("reviews")
+            elif sort == "date":
+                if sortType == "inc":
+                    queryset = queryset.order_by("-date")
+                else:
+                    queryset = queryset.order_by("date")
             return queryset
+
+class BasketGETAPIView(APIView):
+    def get(self, request: Request):
+        queryset = Product.objects.all()
+        serializer = ProductsPopularAndLimitedSerializers(queryset, many=True)
+        return Response(serializer.data)

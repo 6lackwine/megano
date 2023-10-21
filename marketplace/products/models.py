@@ -7,8 +7,8 @@ class Product(models.Model):
     category = models.ForeignKey(Categories, on_delete=models.SET_NULL, null=True, blank=False)
     price = models.DecimalField(default=0, max_digits=8, decimal_places=2, blank=False)
     count = models.IntegerField(default=0, blank=False)
-    date = models.DateTimeField(auto_now_add=True, null=True)
-    title = models.CharField(max_length=100, blank=False)
+    date = models.DateTimeField(auto_now_add=True)
+    title = models.CharField(max_length=100, blank=False, db_index=True)
     description = models.TextField(blank=True)
     fullDescription = models.CharField(max_length=100, blank=True)
     freeDelivery = models.BooleanField(default=True)
@@ -18,6 +18,7 @@ class Product(models.Model):
     specification = models.ForeignKey("ProductSpecification", on_delete=models.CASCADE, null=True)
     rating = models.DecimalField(default=0, max_digits=3, decimal_places=2)
     available = models.BooleanField(default=True)
+    limited = models.BooleanField(default=True)
 
 def product_image_directory_path(instance: "ProductImage", filename: str) -> str:
     return "product/product_{pk}/images/{filename}".format(
@@ -52,3 +53,8 @@ class Sale(models.Model):
     dateFrom = models.DateField(auto_now_add=True)
     dateTo = models.DateField(auto_now_add=True)
     salePrice = models.DecimalField(max_digits=8, decimal_places=2, default=0)
+
+    def price(self):
+        return self.product.price
+    def title(self):
+        return self.product.title

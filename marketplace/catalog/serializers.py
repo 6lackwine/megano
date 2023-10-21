@@ -2,6 +2,7 @@ from rest_framework import serializers, pagination
 from rest_framework.response import Response
 
 from catalog.models import Categories, CategoryImage
+from products.models import Product
 
 
 class CategoryImageSerializers(serializers.ModelSerializer):
@@ -30,13 +31,19 @@ class CategoriesSerializers(serializers.ModelSerializer):
         model = Categories
         fields = "id", "title", "image", "subcategories"
 
+class BasketSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = "id", "category", "price", "count", "date", "title", "description", \
+            "freeDelivery", "images", "tags", "reviews", "rating"
+
 class CustomPagination(pagination.PageNumberPagination):
-    page_size = 2
+    page_size = 5
     max_page_size = 1000
-    page_query_param = "page_size"
+    page_query_param = "currentPage"
     def get_paginated_response(self, data):
         return Response({
             'items': data,
-            "currentPage": self.page.number,
+            "currentPage": self.request.query_params["currentPage"],
             "lastPage": self.page.paginator.num_pages,
         })

@@ -1,15 +1,21 @@
 from rest_framework import serializers
 
 from catalog.serializers import CategoriesSerializers
-from products.models import Product, Tag, ProductSpecification, Review, ProductImage
+from products.models import Product, Tag, ProductSpecification, Review, ProductImage, Sale
 
 
 class TagSerializers(serializers.ModelSerializer):
     class Meta:
         model = Tag
-        fields = ("name",)
+        fields = ("id", "name",)
 
 class ReviewSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Review
+        fields = "author", "email", "text", "rate", "date"
+
+class ReviewPOSTSerializers(serializers.ModelSerializer):
+    author = serializers.CharField(max_length=100)
     class Meta:
         model = Review
         fields = "author", "email", "text", "rate", "date"
@@ -43,3 +49,33 @@ class ProductSerializers(serializers.ModelSerializer):
         model = Product
         fields = "id", "category", "price", "count", "date", "title", "description", \
             "fullDescription", "freeDelivery", "images", "tags", "reviews", "specifications", "rating"
+
+class ProductsPopularAndLimitedSerializers(serializers.ModelSerializer):
+    price = serializers.FloatField()
+    #date = serializers.DateTimeField()
+    images = ProductImageSerializers(many=True)
+    tags = TagSerializers(many=True)
+    reviews = serializers.IntegerField(source="reviews.count")
+    rating = serializers.FloatField()
+    class Meta:
+        model = Product
+        fields = "id", "category", "price", "count", "date", "title", "description", \
+            "freeDelivery", "images", "tags", "reviews", "rating"
+
+class SalesSerializers(serializers.ModelSerializer):
+    price = serializers.StringRelatedField()
+    title = serializers.StringRelatedField()
+    images = serializers.SerializerMethodField()
+    dateFrom = serializers.DateTimeField()
+    dateTo = serializers.DateTimeField()
+
+    def get_images(self, instance):
+        images = []
+        images_tmp = instance.product.images.all()
+        for image in images_tmp:
+            images.append({"src": f"{image.src}", "alt": image.alt})
+        return images
+
+    class Meta:
+        model = Sale
+        fields = "id", "price", "salePrice", "dateFrom", "dateTo", "title", "images",
