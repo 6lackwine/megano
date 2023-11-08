@@ -18,4 +18,9 @@ class ProfileSerializers(serializers.ModelSerializer):
 class UserSerializers(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = "username", "password", "first_name"
+        fields = "username", "password"
+
+class PasswordUpdateSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = "password",

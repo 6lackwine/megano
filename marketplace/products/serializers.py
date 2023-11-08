@@ -3,6 +3,8 @@ from rest_framework import serializers
 from catalog.serializers import CategoriesSerializers
 from products.models import Product, Tag, ProductSpecification, Review, ProductImage, Sale
 
+from django.conf import settings
+
 
 class TagSerializers(serializers.ModelSerializer):
     class Meta:
@@ -32,6 +34,7 @@ class ProductImageSerializers(serializers.ModelSerializer):
 
 
 class ProductSerializers(serializers.ModelSerializer):
+    price = serializers.FloatField()
     images = ProductImageSerializers(many=True)
     tags = TagSerializers(many=True)
     reviews = ReviewSerializers(many=True)
@@ -73,7 +76,7 @@ class SalesSerializers(serializers.ModelSerializer):
         images = []
         images_tmp = instance.product.images.all()
         for image in images_tmp:
-            images.append({"src": f"{image.src}", "alt": image.alt})
+            images.append({"src": f"{settings.MEDIA_URL}{image.src}", "alt": image.alt})
         return images
 
     class Meta:

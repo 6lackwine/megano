@@ -38,12 +38,15 @@
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files />
+    <open-files>
+      <object connection-id="978a9e2f-c8d7-48b5-9792-acd67a661037" object-ref="schemas/main/tables/orders_productordercount" />
+    </open-files>
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
     <filter-actions connection-id="978a9e2f-c8d7-48b5-9792-acd67a661037" dataset="main.profiles_profiles" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="978a9e2f-c8d7-48b5-9792-acd67a661037" dataset="main.products_product" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="978a9e2f-c8d7-48b5-9792-acd67a661037" dataset="main.catalog_categories" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="978a9e2f-c8d7-48b5-9792-acd67a661037" dataset="main.orders_productordercount" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="978a9e2f-c8d7-48b5-9792-acd67a661037" dataset="main.products_product_tag" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="978a9e2f-c8d7-48b5-9792-acd67a661037" dataset="main.products_tag_products" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="978a9e2f-c8d7-48b5-9792-acd67a661037" dataset="main.orders_order_products" active-filter-id="EMPTY_FILTER" />

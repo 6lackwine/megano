@@ -44,6 +44,6 @@ class CustomPagination(pagination.PageNumberPagination):
     def get_paginated_response(self, data):
         return Response({
             'items': data,
-            "currentPage": self.request.query_params["currentPage"],
+            "currentPage": self.page.number, #self.request.query_params["currentPage"],
             "lastPage": self.page.paginator.num_pages,
         })

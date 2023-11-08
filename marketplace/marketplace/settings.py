@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "catalog.apps.CatalogConfig",
     "orders.apps.OrdersConfig",
     "profiles.apps.ProfilesConfig",
+    "cart.apps.CartConfig",
 ]
 
 MIDDLEWARE = [
@@ -145,3 +146,5 @@ REST_FRAMEWORK = {
         "django_filters.rest_framework.DjangoFilterBackend",
     ]
 }
+
+CART_SESSION_ID = "cart"

@@ -6,12 +6,12 @@ class Profiles(models.Model):
     fullName = models.CharField(max_length=100)
     email = models.EmailField(max_length=50)
     phone = models.CharField(max_length=12)
-    image = models.ForeignKey("ProfileAvatar", on_delete=models.CASCADE)
+    image = models.ForeignKey("ProfileAvatar", on_delete=models.CASCADE, null=True)
 
-def profile_avatar_path(instance: "ProfileAvatar", filename: str) -> str:
-    return "profile/profile_{pk}/users/{filemane}".format(
+def profile_avatar_path(instance: "ProfileAvatar", alt: str) -> str:
+    return "profile/profile_{pk}/users/{alt}".format(
         pk=instance.profile.pk,
-        filename=filename,
+        alt=alt,
     )
 
 class ProfileAvatar(models.Model):

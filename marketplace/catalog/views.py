@@ -79,9 +79,3 @@ class CatalogAPIView(ListAPIView):
                 else:
                     queryset = queryset.order_by("date")
             return queryset
-
-class BasketGETAPIView(APIView):
-    def get(self, request: Request):
-        queryset = Product.objects.all()
-        serializer = ProductsPopularAndLimitedSerializers(queryset, many=True)
-        return Response(serializer.data)
