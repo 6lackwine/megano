@@ -14,11 +14,22 @@ def category_image_directory_path(instance: "CategoryImage", filename: str) -> s
         )
 
 class Categories(models.Model):
-    title = models.CharField(max_length=100, blank=True, db_index=True)
-    image = models.ForeignKey("CategoryImage", on_delete=models.CASCADE, null=True)
-    parent = models.ForeignKey("self", on_delete=models.CASCADE, null=True, related_name="subcategories")
+    title = models.CharField(max_length=100, blank=True, db_index=True, verbose_name="Название")
+    image = models.ForeignKey("CategoryImage", on_delete=models.CASCADE, null=True, verbose_name="Изображение")
+    parent = models.ForeignKey("self", on_delete=models.CASCADE, null=True, related_name="subcategories", verbose_name="Категория")
+
+    class Meta:
+        verbose_name = "Категория"
+        verbose_name_plural = "Категории"
+
+    def __str__(self):
+        return self.title
 
 class CategoryImage(models.Model):
-    src = models.FileField(upload_to=category_image_directory_path)
-    alt = models.CharField(max_length=100, null=True)
+    src = models.FileField(upload_to=category_image_directory_path, verbose_name="Путь")
+    alt = models.CharField(max_length=100, null=True, verbose_name="Название")
     category = models.ForeignKey(Categories, on_delete=models.CASCADE, null=True, related_name="images")
+
+    class Meta:
+        verbose_name = "Изображение категории"
+        verbose_name_plural = "Изображения категорий"

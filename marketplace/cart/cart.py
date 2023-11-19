@@ -33,7 +33,7 @@ class Cart(object):
         return sum(item["quantity"] for item in self.cart.values())
 
 
-    def add(self, product, quantity=1, update_quantity=False):
+    def add(self, product: Product, quantity=1, update_quantity=False):
         # quantity - количество товаров (по умолчанию = 1)
         # update_quantity - значение, которое говорит нужно ли изменить значение количества товара
         # на новое или добавить к существующему (False - добавить к существующему)

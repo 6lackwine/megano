@@ -38,9 +38,7 @@
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="978a9e2f-c8d7-48b5-9792-acd67a661037" object-ref="schemas/main/tables/orders_productordercount" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
     <filter-actions connection-id="978a9e2f-c8d7-48b5-9792-acd67a661037" dataset="main.profiles_profiles" active-filter-id="EMPTY_FILTER" />
@@ -51,11 +49,13 @@
     <filter-actions connection-id="978a9e2f-c8d7-48b5-9792-acd67a661037" dataset="main.products_tag_products" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="978a9e2f-c8d7-48b5-9792-acd67a661037" dataset="main.orders_order_products" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="978a9e2f-c8d7-48b5-9792-acd67a661037" dataset="main.products_tag" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="978a9e2f-c8d7-48b5-9792-acd67a661037" dataset="main.django_session" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="978a9e2f-c8d7-48b5-9792-acd67a661037" dataset="main.profiles_profileavatar" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="978a9e2f-c8d7-48b5-9792-acd67a661037" dataset="main.auth_user" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="978a9e2f-c8d7-48b5-9792-acd67a661037" dataset="main.orders_order" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="978a9e2f-c8d7-48b5-9792-acd67a661037" dataset="main.profiles_profile" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="978a9e2f-c8d7-48b5-9792-acd67a661037" dataset="main.products_product_tags" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="978a9e2f-c8d7-48b5-9792-acd67a661037" dataset="main.sqlite_sequence" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="978a9e2f-c8d7-48b5-9792-acd67a661037" dataset="main.products_review" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="978a9e2f-c8d7-48b5-9792-acd67a661037" dataset="main.products_productimage" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="978a9e2f-c8d7-48b5-9792-acd67a661037" dataset="main.products_sale" active-filter-id="EMPTY_FILTER" />

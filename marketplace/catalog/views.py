@@ -1,3 +1,4 @@
+from django.db.models import Count
 from django.shortcuts import render
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import pagination
@@ -12,7 +13,7 @@ from rest_framework.viewsets import ModelViewSet
 from catalog.filters import ProductFilter
 from catalog.models import Categories
 from catalog.serializers import CategoriesSerializers, CustomPagination, BasketSerializers
-from products.models import Product
+from products.models import Product, Review
 from products.serializers import ProductSerializers, ProductsPopularAndLimitedSerializers
 
 
@@ -38,7 +39,6 @@ class CatalogAPIView(ListAPIView):
             available = self.request.query_params.get("filter[available]")
             tags = self.request.query_params.getlist('tags[]')
             category = self.request.META['HTTP_REFERER'].split('/')[4]
-            print(self.request.query_params)
             if category:
                 categories = [obj.pk for obj in Categories.objects.filter(parent_id=category)]
                 categories.append(int(category))
@@ -70,9 +70,11 @@ class CatalogAPIView(ListAPIView):
                     queryset = queryset.order_by("rating")
             elif sort == "reviews":
                 if sortType == "inc":
-                    queryset = queryset.order_by("-reviews")
+                    queryset = queryset.annotate(rev=Count("reviews")).order_by("-rev")
+                    print(queryset)
                 else:
-                    queryset = queryset.order_by("reviews")
+                    queryset = queryset.annotate(rev=Count("reviews")).order_by("rev")
+                    print(queryset)
             elif sort == "date":
                 if sortType == "inc":
                     queryset = queryset.order_by("-date")

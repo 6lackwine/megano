@@ -1,6 +1,5 @@
 import json
 
-from django.shortcuts import render
 from rest_framework.generics import get_object_or_404
 from rest_framework.request import Request
 from rest_framework.response import Response
@@ -29,7 +28,6 @@ class BasketAPIView(APIView):
         return Response(serializer.data)
 
     def post(self, request: Request):
-        print(request.data)
         cart = Cart(request)
         product = get_object_or_404(Product, id=request.data.get('id'))
         cart.add(product=product, quantity=request.data.get('count'))

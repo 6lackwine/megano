@@ -1,10 +1,7 @@
-from django.contrib.auth.models import User
-from django.shortcuts import render, get_object_or_404
 from rest_framework.request import Request
 from rest_framework.response import Response
 
 from rest_framework.views import APIView
-from rest_framework.generics import RetrieveUpdateAPIView
 
 from cart.cart import Cart
 from orders.models import Order, ProductOrderCount
@@ -60,7 +57,6 @@ class OrderIDAPIView(APIView):
         return Response(serializer.data)
 
     def post(self, request: Request, pk):
-        print(request.data)
         order = Order.objects.get(pk=pk)
         order.fullName = request.data["fullName"]
         order.phone = request.data["phone"]

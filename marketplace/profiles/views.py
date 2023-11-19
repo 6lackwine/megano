@@ -7,11 +7,13 @@ from django.http import HttpResponse, JsonResponse, HttpRequest
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from rest_framework.decorators import api_view
+from rest_framework.mixins import UpdateModelMixin
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.reverse import reverse
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.request import Request
-from rest_framework.generics import RetrieveUpdateAPIView, CreateAPIView, UpdateAPIView
+from rest_framework.generics import RetrieveUpdateAPIView, CreateAPIView, UpdateAPIView, GenericAPIView
 
 from cart.cart import Cart
 from marketplace import settings
@@ -20,6 +22,7 @@ from profiles.serializers import ProfileSerializers, UserSerializers, PasswordUp
 
 
 class ProfileAPIView(APIView):
+    permission_classes = [IsAuthenticated]
     def get(self, request: Request):
         profile = Profiles.objects.get(user=request.user)
         if not profile:
@@ -44,13 +47,11 @@ class ProfileAvatarAPIView(APIView):
 
 class ProfilePasswordAPIView(UpdateAPIView):
     def post(self, request: Request):
-        user = User.objects.get(id=request.user.pk)
+        currentUser = User.objects.get(pk=request.user.pk)
         currentPassword = request.data.get("currentPassword")
-        oldPassword = request.user.password
-        if currentPassword != oldPassword:
+        if currentPassword != currentUser.password:
             return Response(status=400)
-        newPassword = request.data.get("newPassword")
-        newPassword.save()
+        currentUser.password = request.data.get("newPassword")
         return Response(status=200)
 
 
