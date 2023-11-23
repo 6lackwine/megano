@@ -34,7 +34,7 @@ class ProductAdmin(admin.ModelAdmin):
     search_fields = "title", "price"
     fieldsets = [
         (None, {
-            "fields": ("title", "description", "category", "fullDescription", "tag")
+            "fields": ("title", "count", "description", "category", "fullDescription", "tag")
         }),
         ("Price options", {
             "fields": ("price",)

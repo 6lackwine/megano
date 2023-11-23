@@ -7,14 +7,14 @@ from catalog.models import Categories
 class Product(models.Model):
     category = models.ForeignKey(Categories, on_delete=models.SET_NULL, null=True, blank=False, verbose_name="Категория")
     price = models.DecimalField(default=0, max_digits=8, decimal_places=2, blank=False, verbose_name="Цена")
-    count = models.IntegerField(default=0, blank=False, verbose_name="Количество")
+    count = models.IntegerField(default=1, blank=False, verbose_name="Количество")
     date = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     title = models.CharField(max_length=100, blank=False, db_index=True, verbose_name="Название")
     description = models.CharField(max_length=100, blank=True, verbose_name="Описание")
     fullDescription = models.TextField(blank=True, verbose_name="Полное описание")
     freeDelivery = models.BooleanField(default=True, verbose_name="Бесплатная доставка")
     image = models.ForeignKey("ProductImage", on_delete=models.CASCADE, null=True, verbose_name="Изображение")
-    tag = models.ManyToManyField("Tag", verbose_name="Тег")
+    tag = models.ManyToManyField("Tag", verbose_name="Тег", null=True, blank=True)
     review = models.ForeignKey("Review", on_delete=models.CASCADE, null=True, verbose_name="Отзыв")
     specification = models.ForeignKey("ProductSpecification", on_delete=models.CASCADE, null=True, verbose_name="Характеристика")
     rating = models.DecimalField(default=0, max_digits=3, decimal_places=2, verbose_name="Рейтинг")
@@ -62,7 +62,7 @@ class Review(models.Model):
 
 class Tag(models.Model):
     name = models.CharField(max_length=100, blank=True, verbose_name="Название")
-    products = models.ManyToManyField(Product, related_name="tags", verbose_name="Товар")
+    products = models.ManyToManyField(Product, null=True, blank=True, related_name="tags", verbose_name="Товар")
 
     class Meta:
         verbose_name = "Тег"
@@ -85,8 +85,8 @@ class ProductSpecification(models.Model):
 
 class Sale(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="Товар")
-    dateFrom = models.DateField(auto_now_add=False, verbose_name="Действует до")
-    dateTo = models.DateField(auto_now_add=False, verbose_name="Действует с")
+    dateFrom = models.DateField(auto_now_add=False, verbose_name="Действует с")
+    dateTo = models.DateField(auto_now_add=False, verbose_name="Действует до")
     salePrice = models.DecimalField(max_digits=8, decimal_places=2, default=0, verbose_name="Цена со скидкой")
 
     class Meta:

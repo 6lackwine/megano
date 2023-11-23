@@ -2,19 +2,22 @@ from django.contrib import admin
 
 from catalog.models import Categories, CategoryImage
 
-
-class CategoryImageInline(admin.StackedInline):
-    model = CategoryImage
-
 @admin.register(Categories)
 class CategoryAdmin(admin.ModelAdmin):
-    inlines = [
-        CategoryImageInline,
-    ]
     list_display = "pk", "title", "parent"
     fieldsets = [
         (None, {
-            "fields": ("title", "parent")
+            "fields": ("title", "parent", "image")
         }),
     ]
     search_fields = ["title", "parent__title"]
+
+@admin.register(CategoryImage)
+class CategoryImageAdmin(admin.ModelAdmin):
+    list_display = "pk", "src", "alt", "category"
+    fieldsets = [
+        (None, {
+            "fields": ("src", "alt", "category")
+        })
+    ]
+    search_fields = ["alt", "src", "category__title"]

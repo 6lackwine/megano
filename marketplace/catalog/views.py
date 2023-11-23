@@ -1,20 +1,16 @@
 from django.db.models import Count
-from django.shortcuts import render
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import pagination
 
-from rest_framework.generics import GenericAPIView, ListAPIView
-from rest_framework.mixins import ListModelMixin
+from rest_framework.generics import ListAPIView
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.viewsets import ModelViewSet
 
 from catalog.filters import ProductFilter
 from catalog.models import Categories
-from catalog.serializers import CategoriesSerializers, CustomPagination, BasketSerializers
+from catalog.serializers import CategoriesSerializers, CustomPagination
 from products.models import Product, Review
-from products.serializers import ProductSerializers, ProductsPopularAndLimitedSerializers
+from products.serializers import ProductSerializers
 
 
 class CategoryAPIView(APIView):

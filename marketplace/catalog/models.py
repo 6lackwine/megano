@@ -16,7 +16,7 @@ def category_image_directory_path(instance: "CategoryImage", filename: str) -> s
 class Categories(models.Model):
     title = models.CharField(max_length=100, blank=True, db_index=True, verbose_name="Название")
     image = models.ForeignKey("CategoryImage", on_delete=models.CASCADE, null=True, verbose_name="Изображение")
-    parent = models.ForeignKey("self", on_delete=models.CASCADE, null=True, related_name="subcategories", verbose_name="Категория")
+    parent = models.ForeignKey("self", on_delete=models.CASCADE, null=True, blank=True, related_name="subcategories", verbose_name="Категория")
 
     class Meta:
         verbose_name = "Категория"
@@ -33,3 +33,6 @@ class CategoryImage(models.Model):
     class Meta:
         verbose_name = "Изображение категории"
         verbose_name_plural = "Изображения категорий"
+
+    def __str__(self):
+        return f"{self.alt}"

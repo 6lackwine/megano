@@ -18,3 +18,4 @@ class ProfileAdmin(admin.ModelAdmin):
         })
     ]
     search_fields = ["user", "fullName", "phone"]
+    list_per_page = 10

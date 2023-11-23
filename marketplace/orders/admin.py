@@ -21,9 +21,13 @@ class OrderAdmin(admin.ModelAdmin):
         }),
     ]
     search_fields = ["id", "user__user__username", "fullName", "phone", "status", "city", "address"]
+    list_per_page = 10
 
     def products_list(self, obj: ProductOrderCount):
         return ", ".join([b.title for b in obj.products.all()])
+
+    # def products_list(self, obj: Order):
+    #     return ", ".join([product.title for product in obj.products.all()])
 
 
 @admin.register(ProductOrderCount)
@@ -35,3 +39,6 @@ class ProductOrderCountAdmin(admin.ModelAdmin):
             "fields": ("order", "products", "count")
         })
     ]
+
+    # def products_list(self, obj: ProductOrderCount):
+    #     return ", ".join([p.title for p in obj.order.products.all()])

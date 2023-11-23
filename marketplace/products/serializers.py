@@ -33,7 +33,7 @@ class ProductImageSerializers(serializers.ModelSerializer):
 
 class ProductSerializers(serializers.ModelSerializer):
     price = serializers.SerializerMethodField()
-    date = serializers.SerializerMethodField()
+    # date = serializers.SerializerMethodField()
     images = ProductImageSerializers(many=True)
     tags = TagSerializers(many=True)
     reviews = ReviewSerializers(many=True)
@@ -47,9 +47,9 @@ class ProductSerializers(serializers.ModelSerializer):
             instance.save()
         return instance.price
 
-    def get_date(self, instance):
-        date = instance.date + datetime.timedelta(hours=3)
-        return datetime.datetime.strftime(date, '%d.%m.%Y %H:%M')
+    # def get_date(self, instance):
+    #     date = instance.date + datetime.timedelta(hours=3)
+    #     return datetime.datetime.strftime(date, '%d.%m.%Y %H:%M')
 
     class Meta:
         model = Product

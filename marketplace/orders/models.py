@@ -16,7 +16,7 @@ class Order(models.Model):
     status = models.CharField(max_length=100, verbose_name="Статус")
     city = models.CharField(max_length=100, blank=True, verbose_name="Город")
     address = models.CharField(max_length=100, blank=True, verbose_name="Адрес")
-    products = models.ManyToManyField(Product, related_name="orders", verbose_name="Товары")
+    products = models.ManyToManyField(Product, related_name="orders", verbose_name="Товары", through="ProductOrderCount")
 
     class Meta:
         verbose_name = "Заказ"
@@ -28,7 +28,7 @@ class Order(models.Model):
 class ProductOrderCount(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, verbose_name="Заказ")
     products = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="Товары")
-    count = models.PositiveIntegerField(verbose_name="Количество")
+    count = models.PositiveIntegerField(verbose_name="Количество", null=True)
 
     class Meta:
         verbose_name = "Товар и его количество"

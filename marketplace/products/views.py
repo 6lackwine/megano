@@ -67,5 +67,8 @@ class ReviewCreate(CreateModelMixin, GenericAPIView):
             "rate": request.data["rate"],
             "date": datetime.now()
         }]
+        reviews = Review.objects.filter(products_id=product.pk)
+        summa = sum([obj.rate for obj in reviews])
+        product.rating = summa / len(reviews)
         product.save()
         return Response(review)
